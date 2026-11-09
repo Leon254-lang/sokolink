@@ -1,0 +1,13 @@
+# Local environment
+shop/
+.venv/
+venv/
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Django and local database
+db.sqlite3
+staticfiles/
