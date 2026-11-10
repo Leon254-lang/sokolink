@@ -4,7 +4,7 @@ from sokolinkapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('html/', views.index, name='index'),
+    path('', views.index, name='index'),
     path('blog/', views.blog, name='blog'),
     path('blog-details/', views.blogdetail, name='blog-details'),
     path('service-details/', views.service, name='service-details'),
