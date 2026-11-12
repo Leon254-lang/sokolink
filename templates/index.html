@@ -1125,36 +1125,47 @@
           <div class="col-lg-7">
             <form  method="post">
               {% csrf_token %}
+              {% if messages %}
+                {% for message in messages %}
+                  <div class="alert alert-success" role="status">{{ message }}</div>
+                {% endfor %}
+              {% endif %}
+              {% if contact_form.errors %}
+                <div class="alert alert-danger" role="alert">
+                  Please correct the errors below and try again.
+                </div>
+              {% endif %}
               <div class="row gy-4">
 
                 <div class="col-md-6">
                   <label for="name-field" class="pb-2">Your Name</label>
-                  <input type="text" name="name" id="name-field" class="form-control" required="">
+                  {{ contact_form.name }}
+                  {{ contact_form.name.errors }}
                 </div>
                 <div class="col-md-6">
                   <label for="phone-field" class="pb-2">Your Phone</label>
-                  <input type="tel" class="form-control" name="phone" id="phone-field">
+                  {{ contact_form.phone }}
+                  {{ contact_form.phone.errors }}
                 </div>
                 <div class="col-md-6">
                   <label for="email-field" class="pb-2">Your Email</label>
-                  <input type="email" class="form-control" name="email" id="email-field" required="">
+                  {{ contact_form.email }}
+                  {{ contact_form.email.errors }}
                 </div>
 
                 <div class="col-md-12">
                   <label for="subject-field" class="pb-2">Subject</label>
-                  <input type="text" class="form-control" name="subject" id="subject-field" required="">
+                  {{ contact_form.subject }}
+                  {{ contact_form.subject.errors }}
                 </div>
 
                 <div class="col-md-12">
                   <label for="message-field" class="pb-2">Message</label>
-                  <textarea class="form-control" name="message" rows="10" id="message-field" required=""></textarea>
+                  {{ contact_form.message }}
+                  {{ contact_form.message.errors }}
                 </div>
 
                 <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-
                   <button type="submit">Send Message</button>
                 </div>
 
