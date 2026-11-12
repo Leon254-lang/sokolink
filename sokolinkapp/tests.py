@@ -27,6 +27,70 @@ class ContactPageTests(TestCase):
         self.assertContains(response, 'Alex Example')
         self.assertContains(response, 'Please call me.')
 
+    def test_contact_edit_page_is_staff_only(self):
+        contact = self._create_contact()
+
+        response = self.client.get(f'/contacts/{contact.id}/edit/')
+
+        self.assertEqual(response.status_code, 302)
+        self.assertIn('/admin/login/', response['Location'])
+
+    def test_staff_can_update_contact_message(self):
+        staff_user = self._create_staff_user()
+        self.client.force_login(staff_user)
+        contact = self._create_contact()
+        url = f'/contacts/{contact.id}/edit/'
+
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'value="Alex Example"')
+
+        response = self.client.post(url, {
+            'name': 'Alex Updated',
+            'phone': '555-0199',
+            'email': 'updated@example.com',
+            'subject': 'Updated question',
+            'message': 'An updated message.',
+        })
+
+        self.assertRedirects(response, '/contacts/')
+        contact.refresh_from_db()
+        self.assertEqual(contact.name, 'Alex Updated')
+        self.assertEqual(contact.email, 'updated@example.com')
+        self.assertEqual(contact.message, 'An updated message.')
+
+    def test_invalid_contact_edit_keeps_existing_record(self):
+        staff_user = self._create_staff_user()
+        self.client.force_login(staff_user)
+        contact = self._create_contact()
+
+        response = self.client.post(f'/contacts/{contact.id}/edit/', {
+            'name': 'Alex Updated',
+            'phone': '555-0199',
+            'email': 'not-an-email',
+            'subject': 'Updated question',
+            'message': 'An updated message.',
+        })
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Review the highlighted fields and try again.')
+        contact.refresh_from_db()
+        self.assertEqual(contact.name, 'Alex Example')
+        self.assertEqual(contact.email, 'alex@example.com')
+
+    def test_empty_contact_edit_shows_required_field_errors(self):
+        staff_user = self._create_staff_user()
+        self.client.force_login(staff_user)
+        contact = self._create_contact()
+
+        response = self.client.post(f'/contacts/{contact.id}/edit/', {})
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'This field is required.')
+        contact.refresh_from_db()
+        self.assertEqual(contact.name, 'Alex Example')
+
     def test_contact_form_saves_valid_submission(self):
         response = self.client.post('/', {
             'name': 'Alex Example',
@@ -91,4 +155,13 @@ class ContactPageTests(TestCase):
             username='staff',
             password='test-password',
             is_staff=True,
+        )
+
+    def _create_contact(self):
+        return Contact.objects.create(
+            name='Alex Example',
+            phone='555-0100',
+            email='alex@example.com',
+            subject='Question',
+            message='Please call me.',
         )

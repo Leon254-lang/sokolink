@@ -1,11 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Contact</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Update a SokoLink contact message.">
+  <title>Edit contact message | SokoLink</title>
+  {% load static %}
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+  <style>
+    .edit-page {
+      min-height: 100vh;
+      background: linear-gradient(180deg, #f5f8fc 0, #fff 22rem);
+    }
+
+    .edit-card {
+      border: 0;
+      border-radius: 1rem;
+      box-shadow: 0 1rem 3rem rgba(55, 81, 126, 0.1);
+    }
+
+    .edit-card .form-label {
+      color: var(--heading-color);
+      font-weight: 600;
+    }
+
+    .edit-card textarea {
+      min-height: 12rem;
+      resize: vertical;
+    }
+  </style>
 </head>
-<body>
-    
+<body class="edit-page">
+  <main class="container py-5">
+    <nav aria-label="Breadcrumb" class="mb-4">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">SokoLink</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'contacts' %}">Contact messages</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Edit message</li>
+      </ol>
+    </nav>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-9 col-xl-8">
+        <header class="mb-4">
+          <p class="text-uppercase text-primary fw-semibold small mb-2">Message #{{ contact.id }}</p>
+          <h1 class="mb-2">Edit contact message</h1>
+          <p class="text-muted mb-0">Update the sender's details or make a correction to their message.</p>
+        </header>
+
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-success" role="status">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+
+        {% if contact_form.errors %}
+          <div class="alert alert-danger" role="alert">
+            <strong>We couldn't save these changes.</strong> Review the highlighted fields and try again.
+          </div>
+        {% endif %}
+
+        <section class="card edit-card">
+          <div class="card-body p-4 p-md-5">
+            <form method="post">
+              {% csrf_token %}
+              <div class="row g-4">
+                <div class="col-md-6">
+                  <label class="form-label" for="{{ contact_form.name.id_for_label }}">Name</label>
+                  {{ contact_form.name }}
+                  {% for error in contact_form.name.errors %}
+                    <div id="id_name_error" class="invalid-feedback d-block">{{ error }}</div>
+                  {% endfor %}
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="{{ contact_form.phone.id_for_label }}">Phone</label>
+                  {{ contact_form.phone }}
+                  {% for error in contact_form.phone.errors %}
+                    <div id="id_phone_error" class="invalid-feedback d-block">{{ error }}</div>
+                  {% endfor %}
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="{{ contact_form.email.id_for_label }}">Email address</label>
+                  {{ contact_form.email }}
+                  {% for error in contact_form.email.errors %}
+                    <div id="id_email_error" class="invalid-feedback d-block">{{ error }}</div>
+                  {% endfor %}
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="{{ contact_form.subject.id_for_label }}">Subject</label>
+                  {{ contact_form.subject }}
+                  {% for error in contact_form.subject.errors %}
+                    <div id="id_subject_error" class="invalid-feedback d-block">{{ error }}</div>
+                  {% endfor %}
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="{{ contact_form.message.id_for_label }}">Message</label>
+                  {{ contact_form.message }}
+                  {% for error in contact_form.message.errors %}
+                    <div id="id_message_error" class="invalid-feedback d-block">{{ error }}</div>
+                  {% endfor %}
+                </div>
+              </div>
+
+              <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 border-top mt-4 pt-4">
+                <a class="btn btn-outline-secondary" href="{% url 'contacts' %}">
+                  <i class="bi bi-arrow-left me-1" aria-hidden="true"></i> Cancel
+                </a>
+                <button class="btn btn-primary px-4" type="submit">
+                  <i class="bi bi-check2 me-1" aria-hidden="true"></i> Save changes
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+        <p class="small text-muted mt-3 mb-0">
+          <i class="bi bi-shield-lock me-1" aria-hidden="true"></i>
+          Contact message details are only editable by authorized staff.
+        </p>
+      </div>
+    </div>
+  </main>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>

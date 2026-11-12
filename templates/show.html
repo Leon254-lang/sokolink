@@ -52,6 +52,9 @@
                 <td>{{ contact.subject }}</td>
                 <td class="text-break">{{ contact.message|linebreaksbr }}</td>
                 <td>
+                  <a class="btn btn-sm btn-outline-primary" href="{% url 'contact-edit' contact.id %}">
+                    <i class="bi bi-pencil-square" aria-hidden="true"></i> Edit
+                  </a>
                   <a class="btn btn-sm btn-outline-primary" href="mailto:{{ contact.email }}">Reply</a>
                   {% if contact.phone %}
                     <a class="btn btn-sm btn-outline-secondary" href="tel:{{ contact.phone }}">Call</a>

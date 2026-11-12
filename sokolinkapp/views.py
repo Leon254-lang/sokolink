@@ -49,6 +49,25 @@ def show(request):
 
 
 @staff_member_required
+def edit_contact(request, contact_id):
+    contact = get_object_or_404(Contact, pk=contact_id)
+    contact_form = ContactForm(
+        request.POST if request.method == 'POST' else None,
+        instance=contact,
+    )
+
+    if request.method == 'POST' and contact_form.is_valid():
+        contact_form.save()
+        messages.success(request, 'The contact message was updated.')
+        return redirect('contacts')
+
+    return render(request, 'edit.html', {
+        'contact': contact,
+        'contact_form': contact_form,
+    })
+
+
+@staff_member_required
 @require_POST
 def delete_contact(request, contact_id):
     contact = get_object_or_404(Contact, pk=contact_id)
