@@ -40,6 +40,11 @@ def portfolio(request):
 
 def starter(request):
     return render(request, 'starter-page.html')
+def register(request):
+    return render(request, 'register.html')
+
+def login(request):
+    return render(request, 'login.html')
 
 
 @staff_member_required
