@@ -1,6 +1,58 @@
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 
 from .models import Contact
+
+
+class LoginTests(TestCase):
+    def test_login_accepts_email_and_redirects_to_index(self):
+        response = self.client.post('/', {
+            'username': 'market-owner',
+            'email': 'owner@example.com',
+            'password': 'test-password',
+        })
+        self.assertRedirects(response, '/login/')
+
+        response = self.client.post('/login/', {
+            'email': 'owner@example.com',
+            'password': 'test-password',
+        })
+
+        self.assertRedirects(response, '/index/')
+        self.assertEqual(
+            self.client.session['_auth_user_id'],
+            str(get_user_model().objects.get(username='market-owner').pk),
+        )
+
+    def test_invalid_login_displays_error(self):
+        response = self.client.post('/login/', {
+            'email': 'unknown@example.com',
+            'password': 'wrong-password',
+        })
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Invalid email or password.')
+
+    def test_login_rejects_duplicate_email_addresses(self):
+        user_model = get_user_model()
+        user_model.objects.create_user(
+            username='first-owner',
+            email='shared@example.com',
+            password='test-password',
+        )
+        user_model.objects.create_user(
+            username='second-owner',
+            email='shared@example.com',
+            password='test-password',
+        )
+
+        response = self.client.post('/login/', {
+            'email': 'shared@example.com',
+            'password': 'test-password',
+        })
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Invalid email or password.')
 
 
 class ContactPageTests(TestCase):
