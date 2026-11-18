@@ -11,35 +11,46 @@
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
 :root { 
   --background-color: #ffffff; /* Background color for the entire website, including individual sections */
-  --default-color: #444444; /* Default color used for the majority of the text content across the entire website */
-  --heading-color: #37517e; /* Color for headings, subheadings and title throughout the website */
-  --accent-color: #47b2e4; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --default-color: #52636b; /* Default color used for the majority of the text content across the entire website */
+  --heading-color: #173b45; /* Color for headings, subheadings and title throughout the website */
+  --accent-color: #168a78; /* Color used for buttons, links, and other elements that need to stand out */
   --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
   --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+  --bs-primary: #168a78;
+  --bs-primary-rgb: 22, 138, 120;
+  --bs-secondary: #173b45;
+  --bs-secondary-rgb: 23, 59, 69;
+  --bs-success: #168a78;
+  --bs-success-rgb: 22, 138, 120;
+  --bs-body-color: #52636b;
+  --bs-body-bg: #ffffff;
+  --bs-link-color: #168a78;
+  --bs-link-hover-color: #117564;
+  --bs-focus-ring-color: rgba(22, 138, 120, 0.25);
 }
 
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
 :root {
   --nav-color: #ffffff;  /* The default color of the main navmenu links */
-  --nav-hover-color: #47b2e4; /* Applied to main navmenu links when they are hovered over or active */
+  --nav-hover-color: #58d1b3; /* Applied to main navmenu links when they are hovered over or active */
   --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
   --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
-  --nav-dropdown-color: #444444; /* Used for navigation links of the dropdown items in the navigation menu. */
-  --nav-dropdown-hover-color: #47b2e4; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+  --nav-dropdown-color: #52636b; /* Used for navigation links of the dropdown items in the navigation menu. */
+  --nav-dropdown-hover-color: #168a78; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
 }
 
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
 
 .light-background {
-  --background-color: #f5f6f8;
+  --background-color: #f3f8f6;
   --surface-color: #ffffff;
 }
 
 .dark-background {
-  --background-color: #37517e;
+  --background-color: #153f49;
   --default-color: #ffffff;
   --heading-color: #ffffff;
-  --surface-color: #4668a2;
+  --surface-color: #20535b;
   --contrast-color: #ffffff;
 }
 
@@ -134,7 +145,7 @@ h6 {
 # Global Header
 --------------------------------------------------------------*/
 .header {
-  --background-color: #3d4d6a;
+  --background-color: #153f49;
   --heading-color: #ffffff;
   color: var(--default-color);
   background-color: var(--background-color);
@@ -3565,4 +3576,622 @@ section,
   padding-left: 5px;
   color: color-mix(in srgb, var(--default-color), transparent 60%);
   font-size: 14px;
+}
+
+body {
+  line-height: 1.7;
+}
+
+.section {
+  padding-block: 84px;
+}
+
+.index-page .header {
+  background-color: rgba(21, 63, 73, 0.3);
+  backdrop-filter: blur(14px);
+}
+
+.index-page.scrolled .header {
+  background-color: rgba(21, 63, 73, 0.96);
+}
+
+.header .logo h1 {
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.header .btn-getstarted,
+.btn-get-started {
+  font-weight: 600;
+  box-shadow: 0 8px 20px rgba(22, 138, 120, 0.2);
+}
+
+.hero.dark-background {
+  background:
+    radial-gradient(ellipse at 82% 18%, rgba(88, 209, 179, 0.17), transparent 38%),
+    linear-gradient(135deg, #123640 0%, #153f49 56%, #20535b 100%);
+}
+
+.hero h1 {
+  max-width: 650px;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
+.hero p {
+  max-width: 560px;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.section-title h2 {
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.service-item,
+.portfolio .portfolio-item,
+.team .member,
+.pricing .pricing-item,
+.contact .info-wrap,
+.contact form {
+  border-radius: 18px;
+}
+
+.service-item,
+.team .member,
+.pricing .pricing-item,
+.contact .info-wrap,
+.contact form {
+  box-shadow: 0 12px 36px rgba(23, 59, 69, 0.07);
+}
+
+.service-item {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.service-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 42px rgba(23, 59, 69, 0.12);
+}
+
+.contact form {
+  padding: 30px;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 0.22rem rgba(22, 138, 120, 0.14);
+}
+
+.auth-page {
+  min-height: 100vh;
+  color: var(--default-color);
+  background:
+    radial-gradient(ellipse at 12% 10%, rgba(88, 209, 179, 0.12), transparent 34%),
+    #f3f8f6;
+}
+
+.auth-shell {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  padding-block: 48px;
+}
+
+.auth-layout {
+  overflow: hidden;
+  min-height: 640px;
+  border-radius: 26px;
+  background: var(--surface-color);
+  box-shadow: 0 28px 80px rgba(23, 59, 69, 0.14);
+}
+
+.auth-intro {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: clamp(36px, 6vw, 72px);
+  color: #fff;
+  background:
+    radial-gradient(circle at 88% 18%, rgba(88, 209, 179, 0.26), transparent 32%),
+    linear-gradient(145deg, #123640, #20535b);
+}
+
+.auth-intro::after {
+  position: absolute;
+  right: -110px;
+  bottom: -180px;
+  width: 380px;
+  height: 380px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  box-shadow: 0 0 0 36px rgba(255, 255, 255, 0.035), 0 0 0 72px rgba(255, 255, 255, 0.025);
+  content: "";
+  pointer-events: none;
+}
+
+.auth-brand,
+.auth-mobile-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: inherit;
+  font-family: var(--heading-font);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.auth-brand:hover,
+.auth-mobile-brand:hover {
+  color: inherit;
+}
+
+.auth-brand-mark {
+  display: inline-grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 13px;
+  color: #fff;
+  background: var(--accent-color);
+}
+
+.auth-intro-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 440px;
+  margin-block: 52px;
+}
+
+.auth-eyebrow {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--accent-color);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.auth-intro .auth-eyebrow {
+  color: #7fe0c6;
+}
+
+.auth-intro h1 {
+  margin-bottom: 18px;
+  color: #fff;
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 1.12;
+}
+
+.auth-intro-copy p {
+  max-width: 390px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 1.05rem;
+}
+
+.auth-intro-note {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.9rem;
+}
+
+.auth-intro-note i {
+  color: #7fe0c6;
+  font-size: 1.25rem;
+}
+
+.auth-form-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(32px, 6vw, 76px);
+}
+
+.auth-form-wrap {
+  width: 100%;
+  max-width: 410px;
+}
+
+.auth-mobile-brand {
+  display: none;
+  margin-bottom: 36px;
+  color: var(--heading-color);
+}
+
+.auth-form-wrap h1,
+.auth-form-wrap h2 {
+  margin-bottom: 8px;
+  color: var(--heading-color);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
+.auth-form-description {
+  margin-bottom: 28px;
+  color: #73828a;
+}
+
+.auth-page .form-label {
+  margin-bottom: 8px;
+  color: var(--heading-color);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.auth-page .form-control {
+  min-height: 52px;
+  padding: 12px 15px;
+  border: 1px solid #dce7e4;
+  border-radius: 10px;
+  background-color: #fbfdfc;
+}
+
+.auth-page .form-control:focus {
+  background-color: #fff;
+}
+
+.auth-submit {
+  min-height: 52px;
+  border: 0;
+  border-radius: 10px;
+  color: #fff;
+  background: var(--accent-color);
+  font-weight: 700;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.auth-submit:hover,
+.auth-submit:focus {
+  color: #fff;
+  background: #117564;
+  transform: translateY(-1px);
+}
+
+.auth-switch {
+  margin: 26px 0 0;
+  text-align: center;
+  font-size: 0.92rem;
+}
+
+.auth-switch a {
+  color: var(--accent-color);
+  font-weight: 700;
+}
+
+.auth-back-link {
+  display: block;
+  margin-top: 24px;
+  color: #73828a;
+  text-align: center;
+  font-size: 0.88rem;
+}
+
+.auth-register .auth-form-wrap {
+  max-width: 500px;
+}
+
+@media (max-width: 991.98px) {
+  .auth-shell {
+    padding-block: 28px;
+  }
+
+  .auth-layout {
+    min-height: auto;
+  }
+
+  .auth-intro {
+    min-height: 320px;
+    padding: 32px;
+  }
+
+  .auth-intro-copy {
+    margin-block: 48px 12px;
+  }
+
+  .auth-intro-note {
+    display: none;
+  }
+
+  .auth-form-panel {
+    padding: 40px 32px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .section {
+    padding-block: 64px;
+  }
+
+  .auth-shell {
+    padding: 16px;
+  }
+
+  .auth-layout {
+    border-radius: 20px;
+  }
+
+  .auth-intro {
+    display: none;
+  }
+
+  .auth-form-panel {
+    padding: 32px 24px;
+  }
+
+  .auth-mobile-brand {
+    display: inline-flex;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-item,
+  .auth-submit {
+    transition: none;
+  }
+}
+
+.btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--accent-color);
+  --bs-btn-border-color: var(--accent-color);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #117564;
+  --bs-btn-hover-border-color: #117564;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #0e6859;
+  --bs-btn-active-border-color: #0e6859;
+  --bs-btn-focus-shadow-rgb: 22, 138, 120;
+}
+
+.btn-outline-primary {
+  --bs-btn-color: var(--accent-color);
+  --bs-btn-border-color: var(--accent-color);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--accent-color);
+  --bs-btn-hover-border-color: var(--accent-color);
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #117564;
+  --bs-btn-active-border-color: #117564;
+  --bs-btn-focus-shadow-rgb: 22, 138, 120;
+}
+
+.btn-primary,
+.btn-outline-primary,
+.btn-getstarted,
+.btn-get-started,
+.contact form button {
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover,
+.btn-getstarted:hover,
+.btn-get-started:hover,
+.contact form button:hover {
+  transform: translateY(-1px);
+}
+
+.auth-page .bg-primary {
+  --default-color: #fff;
+  --heading-color: #fff;
+  color: #fff;
+  background-color: #153f49 !important;
+  background-image:
+    radial-gradient(circle at 90% 15%, rgba(88, 209, 179, 0.24), transparent 34%),
+    linear-gradient(145deg, #123640, #20535b) !important;
+}
+
+.auth-page .bg-primary .text-warning {
+  color: #8ce2cb !important;
+}
+
+.auth-page .card {
+  border-radius: 24px !important;
+  box-shadow: 0 28px 80px rgba(23, 59, 69, 0.14) !important;
+}
+
+.auth-page .form-control,
+.auth-page .input-group .btn {
+  border-color: #dce7e4;
+  border-radius: 10px;
+}
+
+.auth-page .input-group .form-control {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.auth-page .input-group .btn {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  background: #fff;
+}
+
+.auth-page .input-group .btn:hover {
+  color: var(--accent-color);
+  background: #f3f8f6;
+}
+
+.page-title {
+  border-bottom: 1px solid rgba(23, 59, 69, 0.06);
+  background: linear-gradient(120deg, #edf5f2, #f8fbfa 68%, #fff);
+}
+
+.page-title h1 {
+  letter-spacing: -0.025em;
+}
+
+.blog-posts article,
+.blog-details .article,
+.blog-details .blog-author,
+.blog-details .comments,
+.blog-details .blog-comment-form form,
+.service-details .services-list,
+.portfolio-details .portfolio-info,
+.widget-item {
+  overflow: hidden;
+  border: 1px solid rgba(23, 59, 69, 0.07);
+  border-radius: 18px;
+  box-shadow: 0 14px 38px rgba(23, 59, 69, 0.07);
+}
+
+.blog-posts .post-img img,
+.blog-details .hero-img img,
+.service-details .services-img,
+.portfolio-details .portfolio-details-slider img {
+  border-radius: 14px;
+}
+
+.blog-posts article,
+.blog-details .article,
+.service-details .services-list,
+.portfolio-details .portfolio-info,
+.widget-item {
+  background-color: var(--surface-color);
+}
+
+.blog-posts .title a,
+.blog-details .article-content .content-header .title {
+  color: var(--heading-color);
+}
+
+.portfolio .portfolio-item .portfolio-info {
+  border-radius: 0 0 14px 14px;
+}
+
+.team .member img {
+  object-fit: cover;
+}
+
+.pricing .pricing-item {
+  border: 1px solid rgba(23, 59, 69, 0.08);
+}
+
+.pricing .pricing-item.featured {
+  border-color: var(--accent-color);
+}
+
+.contact .info-wrap,
+.contact form {
+  border: 1px solid rgba(23, 59, 69, 0.07);
+}
+
+.contact form button {
+  border-radius: 50px;
+  background: var(--accent-color);
+}
+
+.contact form button:hover {
+  background: #117564;
+}
+
+.footer {
+  border-top: 1px solid rgba(23, 59, 69, 0.07);
+}
+
+.admin-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 12% 0, rgba(22, 138, 120, 0.08), transparent 34%),
+    #f3f8f6;
+}
+
+.admin-page h1 {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.admin-page .edit-card {
+  overflow: hidden;
+  border: 1px solid rgba(23, 59, 69, 0.07);
+  border-radius: 18px;
+  box-shadow: 0 18px 48px rgba(23, 59, 69, 0.09);
+}
+
+.admin-page .edit-card .form-label {
+  color: var(--heading-color);
+  font-weight: 600;
+}
+
+.admin-page .edit-card textarea {
+  min-height: 12rem;
+  resize: vertical;
+}
+
+.messages-page .table-responsive {
+  overflow: hidden;
+  border: 1px solid rgba(23, 59, 69, 0.07);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 18px 48px rgba(23, 59, 69, 0.08);
+}
+
+.messages-page .table {
+  margin-bottom: 0;
+}
+
+.messages-page .table > :not(caption) > * > * {
+  padding: 0.9rem 0.85rem;
+  border-color: #e7efec;
+}
+
+.messages-page .table thead th {
+  color: var(--heading-color);
+  background: #edf5f2;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.messages-page .table tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+.form-control,
+.form-select {
+  border-color: #dce7e4;
+  border-radius: 10px;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 0.22rem rgba(22, 138, 120, 0.14);
+}
+
+@media (max-width: 575.98px) {
+  .contact form {
+    padding: 22px;
+  }
+
+  .auth-page > main.container {
+    padding-inline: 12px;
+  }
+
+  .auth-page .card {
+    border-radius: 18px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary,
+  .btn-outline-primary,
+  .btn-getstarted,
+  .btn-get-started,
+  .contact form button {
+    transition: none;
+  }
 }
